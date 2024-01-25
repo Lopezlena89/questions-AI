@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.enviar:hover .tooltip{
+  opacity:1;
+}
+.tooltip {
+    position: absolute;
+    top: -35px;
+    right: -6em;
+    transform: translateX(-40%);
+    opacity: 0;
+    transition: ease-in opacity 150ms;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow:0px 0px 1px gray;
+    height: 25px;
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .sideTransition{
+   
+    animation: slice 1.7s 1;
+    width:300px
+  }
+  @keyframes slice {
+    from {
+    
+      width:0px;
+    }
+    to {
+     
+      width:300px;
+    }
+  }
+  
+
+.boton-menu:hover{
+  box-shadow:0px 0px 5px rgb(255, 144, 238);
+  transition-duration: 400ms;
+}
+.boton-auth:focus{
+  box-shadow:0px 0px 5px rgb(211, 0, 244);
+  transition-duration: 400ms;
+}
+
+.input-text::placeholder { color: rgb(255, 18, 172) }
