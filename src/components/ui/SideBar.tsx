@@ -4,6 +4,7 @@ import { IoLogOut } from "react-icons/io5";
 import type { RootState } from '../../redux/store'
 import { useDispatch, useSelector } from "react-redux";
 import {  changeToogleMenu} from '../../redux/menuSlice';
+import { useAuthStore } from "../../hooks/useAuthStore";
 
 
 
@@ -11,6 +12,7 @@ import {  changeToogleMenu} from '../../redux/menuSlice';
 export const SideBar = () => {
 
     const {isSideMenuOpen} = useSelector((state: RootState) => state.menuSlice)
+    const {startLogout} = useAuthStore();
     const dispatch = useDispatch()
 
   return (
@@ -29,7 +31,10 @@ export const SideBar = () => {
             </div>
             <div className="w-full h-36  flex flex-col justify-end items-center">
 
-                <div className="boton-menu w-10 h-10 mb-6 rounded-full bg-gradient-to-t from-pink-600  to-purple-700 flex justify-center items-center cursor-pointer">
+                <div 
+                    className="boton-menu w-10 h-10 mb-6 rounded-full bg-gradient-to-t from-pink-600  to-purple-700 flex justify-center items-center cursor-pointer"
+                    onClick={()=>startLogout()}
+                >
                     <IoLogOut size={20} className="text-white"/>
                 </div>
         

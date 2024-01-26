@@ -49,4 +49,4 @@
   transition-duration: 400ms;
 }
 
-.input-text::placeholder { color: rgb(255, 18, 172) }
+.input-text::placeholder { color: rgb(255, 18, 172); opacity:0.4 }
