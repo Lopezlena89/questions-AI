@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import geminiapi from "../api/gemini-api";
 import { onSaveMessage } from '../redux/messageSlice';
-import type { RootState } from '../redux/store'
+// import type { RootState } from '../redux/store'
 
 
 export const useMessageStore = () => {
     
-    const { id,message} = useSelector((state:RootState) => state.message);
+    // const { id,message} = useSelector((state:RootState) => state.message);
     const dispatch = useDispatch();
 
 

@@ -6,10 +6,8 @@ interface Prop{
 export const MessageUser = ({message}:Prop) => {
   return (
     <>
-      <div className="w-5/6 h-auto border border-solid border-x-stone-500">
-        <div >
-          {message}
-        </div>
+      <div className="box-message-user">
+            <p>usuario</p>
       </div>
     </>
   )

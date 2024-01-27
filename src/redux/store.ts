@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import menuSlice from './menuSlice'
 import { authSlice } from './authSlice'
 import { messageSlice } from './messageSlice'
+import { groupMessage } from './groupMessageSlice'
 
 export const store = configureStore({
   reducer: {
     menuSlice:menuSlice,
     auth:     authSlice.reducer,
     message:  messageSlice.reducer,
+    groupMessage:  groupMessage.reducer,
   },
 })
 

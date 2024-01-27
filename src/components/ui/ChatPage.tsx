@@ -2,38 +2,37 @@ import { useState } from "react";
 import { LuSendHorizonal } from "react-icons/lu";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { MessageUser } from "./MessageUser";
-import { useMessageStore } from "../../hooks/useMessageStore";
+import { useGroupMessageStore } from "../../hooks/useGroupMessage";
+import { MessageAI } from "./MessageAI";
 
 export const ChatPage = () => {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_GOOGLE_KEY);
-  
+
   const [textAi, setTextAi] = useState('');
   const [getInfo, setGetInfo] = useState('');
-  const { saveMessage } = useMessageStore();
+  const { crearMessageGroup } = useGroupMessageStore();
  
   const onSubmit = async(data) =>{
+
     data.preventDefault();
-    
-    // For text-only input, use the gemini-pro model
-    console.log('entro')
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
     const prompt = textAi;
-
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
     setTextAi('');
     setGetInfo(text);
-    await saveMessage(text);
+    await crearMessageGroup(text);
   }
 
   return (
     <div className="w-full h-full flex justify-center text-white">
       <div className={`h-full flex flex-col justify-between w-full  ease-in-out duration-700`}>
         <div className="w-full h-5/6 flex justify-center items-center ">
-          <div className="mt-10 w-5/6 h-full border boder-solid border-zinc-800 rounded-xl overflow-auto">
+          <div className="mt-10 w-5/6 p-7 h-full border boder-solid border-zinc-800 rounded-xl overflow-auto">
               <MessageUser message={getInfo}/>
+              <MessageAI/>
+              
           </div>
         </div>
         <div className="w-full h-1/5 flex justify-center items-center " >

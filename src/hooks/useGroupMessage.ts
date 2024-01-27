@@ -1,0 +1,84 @@
+import { useDispatch, useSelector } from "react-redux";
+import geminiapi from "../api/gemini-api";
+import { getGroup, addMessageGroup } from '../redux/groupMessageSlice';
+import type { RootState } from '../redux/store'
+// import { messageSlice } from '../redux/messageSlice';
+
+
+export const useGroupMessageStore = () => {
+    
+    const { id} = useSelector((state:RootState) => state.groupMessage);
+    const dispatch = useDispatch();
+
+
+    const getGroupMessage = async() =>{
+        
+       
+        try {
+            const {data} = await geminiapi.get('/group',);
+           
+            
+            if(!data.groupMessages ){
+                await crearGroupEmply();
+                return;
+            }
+            dispatch(getGroup(data));
+            
+            
+           
+        } catch (error) {
+           
+           console.log(error)
+        }
+    }
+    const crearGroupEmply = async()=>{
+        const {data} = await geminiapi.post(`/group/`);
+            
+            if(!data)return 
+            dispatch(addMessageGroup(data))
+    }
+
+    const crearMessageGroup = async(text:string) =>{
+
+        try {
+            const {data} = await geminiapi.post(`/group/${id}`,{message:text});
+            await getGroupMessage();
+            console.log(data)
+            if(!data)return 
+            dispatch(addMessageGroup(data))
+           
+           
+        } catch (error) {
+           
+           console.log(error)
+        }
+    }
+
+
+    const deleteGroup = async() =>{
+        try {
+            await geminiapi.delete(`/group/${id}`);
+            await crearGroupEmply();
+        } catch (error) {
+           
+           console.log(error)
+        }
+    }
+    const deleteGroupMessage = async(messageId:string) =>{
+        try {
+            await geminiapi.delete(`/group/${id}/${messageId}`);
+            await getGroupMessage();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    return{
+        crearGroupEmply,
+        getGroupMessage,
+        deleteGroup,
+        crearMessageGroup,
+        deleteGroupMessage
+    }
+}

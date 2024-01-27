@@ -50,3 +50,43 @@
 }
 
 .input-text::placeholder { color: rgb(255, 18, 172); opacity:0.4 }
+
+.box-message{
+  width:100%;
+  height:auto;
+  padding:10px;
+  border-radius:10px;
+  position:relative;
+  background:rgb(39 39 42);
+  margin-bottom:20px
+}
+.box-message:before{
+  content:'';
+  position:absolute;
+  top:0px;
+  right:-12px;
+  border-left: 10px solid rgb(39 39 42);
+  border-top: 10px solid rgb(39 39 42);
+  border-bottom: 10px solid transparent; 
+  border-right: 10px solid transparent;
+}
+
+.box-message-user{
+  width:100%;
+  height:auto;
+  padding:10px;
+  border-radius:10px;
+  position:relative;
+  background:rgb(219 39 119);
+  margin-bottom:20px
+}
+.box-message-user:before{
+  content:'';
+  position:absolute;
+  top:0px;
+  left:-12px;
+  border-left: 10px solid transparent;
+  border-top: 10px solid rgb(219 39 119);
+  border-bottom: 10px solid transparent; 
+  border-right: 10px solid rgb(219 39 119); 
+}

@@ -25,7 +25,7 @@ export const useAuthStore = () =>{
             }
             
         } catch (error) {
-            dispatch(onLogout('Credenciales incorrectas'));
+            dispatch(onLogout());
             setTimeout(()=>{
                 dispatch(clearErrorMessage())
             },10);
@@ -44,7 +44,7 @@ export const useAuthStore = () =>{
             dispatch(onLogin({name:data.name,uid:data.uid}));
             
         } catch (error) {
-            dispatch(onLogout(error.response.data.msg || '--'));
+            dispatch(onLogout());
             setTimeout(()=>{
                 dispatch(clearErrorMessage())
             },10);
