@@ -1,13 +1,11 @@
-interface Prop{
-  message:string
-}
 
 
-export const MessageUser = ({message}:Prop) => {
+
+export const MessageUser = ({message}:{message:string}) => {
   return (
     <>
       <div className="box-message-user">
-            <p>usuario</p>
+            <p>{message}</p>
       </div>
     </>
   )

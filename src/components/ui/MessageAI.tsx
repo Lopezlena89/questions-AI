@@ -1,10 +1,11 @@
 
 
-export const MessageAI = () => {
+export const MessageAI = ({message}:{message:string}) => {
+  
   return (
     <>
         <div className="box-message">
-            <p >Ai</p>
+        <p >{ message}</p>
         </div>
     </>
   )

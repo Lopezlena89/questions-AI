@@ -45,6 +45,7 @@ export const App = () => {
               : (
                 <>
                   <Route path='/' element={<HomePage/>}/>
+                  <Route path='/:id' element={<HomePage/>}/>
                   <Route path="/*" element={<Navigate to='/'/>}/>
                 </>
               )

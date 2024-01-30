@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import geminiapi from "../api/gemini-api";
 import { getGroup, addMessageGroup } from '../redux/groupMessageSlice';
 import type { RootState } from '../redux/store'
-// import { messageSlice } from '../redux/messageSlice';
+
 
 
 export const useGroupMessageStore = () => {
     
     const { id} = useSelector((state:RootState) => state.groupMessage);
+    
     const dispatch = useDispatch();
 
 
@@ -38,12 +39,12 @@ export const useGroupMessageStore = () => {
             dispatch(addMessageGroup(data))
     }
 
-    const crearMessageGroup = async(text:string) =>{
+    const crearMessageGroup = async(textUser:string,textAi:string) =>{
 
         try {
-            const {data} = await geminiapi.post(`/group/${id}`,{message:text});
+            const {data} = await geminiapi.post(`/group/${id}`,{messageUser:textUser,messageAi:textAi});
             await getGroupMessage();
-            console.log(data)
+            
             if(!data)return 
             dispatch(addMessageGroup(data))
            

@@ -90,3 +90,8 @@
   border-bottom: 10px solid transparent; 
   border-right: 10px solid rgb(219 39 119); 
 }
+
+
+.scroll-sidebar::-webkit-scrollbar {
+  display: none;  /* Ocultar scroll */
+}
