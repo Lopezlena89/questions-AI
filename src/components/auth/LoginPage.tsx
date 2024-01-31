@@ -27,8 +27,8 @@ export const LoginPage = () => {
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center">
-        <div className="w-full h-4/6 p-5 flex flex-col justify-center sm:w-7/12  lg:w-5/12 xl:w-4/12">
-          <div className="flex flex-col items-center h-1/3">
+        <div className="w-full h-4/6 p-5 flex flex-col items-center justify-center sm:w-7/12  lg:w-5/12 xl:w-4/12">
+          <div className="flex flex-col justify-center items-center h-1/3">
               <h1 
                 className="text-4xl font-semibold bg-gradient-to-r from-orange-400 via-purple-400 to-pink-400 inline-block text-transparent bg-clip-text"
               >
@@ -37,7 +37,7 @@ export const LoginPage = () => {
               <h3 className="mt-3 text-3xl font-medium">Log in to  your account</h3>
               <span className="mt-3 text-lg font-thin">Welcome back! Please enter your details</span>
           </div>
-          <div className="h-2/3 flex flex-col items-center">
+          <div className="h-2/3  flex flex-col  items-center">
             <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col items-start">
               <label htmlFor="email" className="font-light">Email</label>
               <input 

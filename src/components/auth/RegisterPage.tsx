@@ -26,7 +26,7 @@ export const RegisterPage = () => {
   return (
     <>
       <div className="w-screen h-screen flex justify-center items-center">
-        <div className="w-full h-5/6 p-5 flex flex-col justify-center sm:w-7/12  lg:w-5/12 xl:w-4/12">
+        <div className="w-full h-5/6 p-5 flex flex-col items-center justify-center sm:w-7/12  lg:w-5/12 xl:w-4/12">
           <div className="flex flex-col justify-center items-center h-1/3">
               <h1 
                 className="text-4xl font-semibold bg-gradient-to-r from-orange-400 via-purple-400 to-pink-400 inline-block text-transparent bg-clip-text"

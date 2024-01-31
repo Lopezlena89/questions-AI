@@ -6,42 +6,46 @@ import { useGroupMessageStore } from "../../hooks/useGroupMessage";
 import { MessageAI } from "./MessageAI";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
-import md from 'markdown-it';
+import { Navbar } from "./Navbar";
 
+export interface MessageInterface{
+  messageAi:string,
+  messageUser:string,
+  _id:string,
+
+}
 
 export const ChatPage = () => {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_GOOGLE_KEY);
-  const {id} = useSelector((state:RootState) => state.idSelect);
-  const {groupMessage} = useSelector((state:RootState) => state.groupMessage);
   
+  const {groupMessage} = useSelector((state:RootState) => state.groupMessage);
+  console.log({groupMessage})
   const [textUser, setTextUser] = useState('');
-  const [textAi, setTextAi] = useState('');
-  const { crearMessageGroup } = useGroupMessageStore();
  
-  const onSubmit = async(data) =>{
+  const { crearMessageGroup } = useGroupMessageStore();
+  
+  const onSubmit = async(data:React.FormEvent<HTMLFormElement>) =>{
 
     data.preventDefault();
     const prompt = textUser; //useState
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-    
     const result = await model.generateContent(prompt);
-    
     const response = await result.response;
     const text = response.text();
-    
+    console.log(text)
     setTextUser('');
-    setTextAi(text);
     await crearMessageGroup(textUser,text);
   }
 
   return (
-    <div className="w-full h-full flex justify-center text-white">
-      <div className={`h-full flex flex-col justify-between w-full  ease-in-out duration-700`}>
-        <div className="w-full h-5/6 flex justify-center items-center ">
-          <div className="mt-10 w-5/6 p-7 h-full border boder-solid border-zinc-800 rounded-xl overflow-auto scroll-sidebar">
+    <div className="w-screen h-screen flex flex-col  text-white">
+      <Navbar/>
+      <div className="h-[85%] mt-10 w-full flex flex-col justify-between   ease-in-out duration-700 md:h-[90%]">
+        <div className="w-full h-5/6 flex justify-center items-center  ">
+          <div className=" w-5/6 p-7 h-full border boder-solid border-zinc-800 rounded-xl overflow-auto scroll-sidebar">
 
             {
-              groupMessage.map((messages,index) => ( 
+              groupMessage.map((messages:MessageInterface,index) => ( 
                  
                   <div key={index}>
                     <MessageUser message={messages.messageUser}/>
@@ -56,8 +60,8 @@ export const ChatPage = () => {
               
           </div>
         </div>
-        <div className="w-full h-1/5 flex justify-center items-center " >
-          <form onSubmit={onSubmit}  className="formulario w-5/6 h-10 relative flex justify-center">
+        <div className="w-full  flex justify-center items-center mb-5 md:mb-0  " >
+          <form onSubmit={(e)=>onSubmit(e)}  className="formulario w-5/6 h-10 relative flex justify-center">
             <input 
               type="text" 
               placeholder="Message Ai" 
@@ -73,6 +77,7 @@ export const ChatPage = () => {
           
         </div>
       </div>
+      
     </div>
   )
 }

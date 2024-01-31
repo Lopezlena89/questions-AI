@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {idSelect} from './IdSelect'
 import { authSlice } from './authSlice'
-import { messageSlice } from './messageSlice'
 import { groupMessage } from './groupMessageSlice'
+import { closeOpenSide } from './closeOpenSide'
+import { messageSlice } from './messageSlice'
+import { idSelect } from './idSelect'
+
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +12,7 @@ export const store = configureStore({
     auth:     authSlice.reducer,
     message:  messageSlice.reducer,
     groupMessage:  groupMessage.reducer,
+    closeOpenSide:  closeOpenSide.reducer,
   },
 })
 

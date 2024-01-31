@@ -58,7 +58,8 @@
   border-radius:10px;
   position:relative;
   background:rgb(39 39 42);
-  margin-bottom:20px
+  margin-bottom:20px;
+  
 }
 .box-message:before{
   content:'';
@@ -95,3 +96,7 @@
 .scroll-sidebar::-webkit-scrollbar {
   display: none;  /* Ocultar scroll */
 }
+.texto-ai{
+  white-space: break-spaces;
+}
+
