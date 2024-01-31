@@ -38,7 +38,7 @@ export const useAuthStore = () =>{
         try {
             
             const {data} = await geminiapi.post('/auth/new',{email,password, name});
-            console.log({data})
+            
             localStorage.setItem('token',data.token);
             localStorage.setItem('token-init-date', String(new Date().getTime()));
             dispatch(onLogin({name:data.name,uid:data.uid}));
@@ -54,6 +54,7 @@ export const useAuthStore = () =>{
     const checkAuthToken = async() =>{
         const token = localStorage.getItem('token');
         if(!token) return  dispatch(onLogout());
+        console.log('check')
 
         try {
             const {data} = await geminiapi.get('auth/renew');

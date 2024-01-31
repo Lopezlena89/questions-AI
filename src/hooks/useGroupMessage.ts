@@ -17,7 +17,7 @@ export const useGroupMessageStore = () => {
        
         try {
             const {data} = await geminiapi.get('/group',);
-           
+            console.log(data);
             
             if(!data.groupMessages ){
                 await crearGroupEmply();

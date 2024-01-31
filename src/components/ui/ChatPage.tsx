@@ -7,6 +7,7 @@ import { MessageAI } from "./MessageAI";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { Navbar } from "./Navbar";
+import { LoadingPage } from "./LoadingPage";
 
 export interface MessageInterface{
   messageAi:string,
@@ -19,23 +20,37 @@ export const ChatPage = () => {
   const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_GOOGLE_KEY);
   
   const {groupMessage} = useSelector((state:RootState) => state.groupMessage);
-  console.log({groupMessage})
+
   const [textUser, setTextUser] = useState('');
+  const [booleanAi, setBooleanAi] = useState(false);
  
   const { crearMessageGroup } = useGroupMessageStore();
   
   const onSubmit = async(data:React.FormEvent<HTMLFormElement>) =>{
 
     data.preventDefault();
+    setBooleanAi(true);
     const prompt = textUser; //useState
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    console.log(text)
+    // const result = await model.generateContent(prompt);
+    // const response = await result.response;
+    // const text = response.text();
+
+    const result = await model.generateContentStream(prompt);
+   
+    let text = '';
+    for await (const chunk of result.stream) {
+      const chunkText = chunk.text();
+      text += chunkText;
+      
+    }
     setTextUser('');
     await crearMessageGroup(textUser,text);
+    setBooleanAi(false);
+
   }
+
+
 
   return (
     <div className="w-screen h-screen flex flex-col  text-white">
@@ -43,24 +58,20 @@ export const ChatPage = () => {
       <div className="h-[85%] mt-10 w-full flex flex-col justify-between   ease-in-out duration-700 md:h-[90%]">
         <div className="w-full h-5/6 flex justify-center items-center  ">
           <div className=" w-5/6 p-7 h-full border boder-solid border-zinc-800 rounded-xl overflow-auto scroll-sidebar">
-
+            
             {
               groupMessage.map((messages:MessageInterface,index) => ( 
-                 
-                  <div key={index}>
+                  <div key={index} className="box-animate" >
                     <MessageUser message={messages.messageUser}/>
                     <MessageAI message={messages.messageAi}/>
                   </div>
-                  
-                  
               ))
             }
-              
-                
+            {booleanAi && <LoadingPage/>}
               
           </div>
         </div>
-        <div className="w-full  flex justify-center items-center mb-5 md:mb-0  " >
+        <div className="w-full  flex justify-center items-center mb-10 md:mb-0  " >
           <form onSubmit={(e)=>onSubmit(e)}  className="formulario w-5/6 h-10 relative flex justify-center">
             <input 
               type="text" 
