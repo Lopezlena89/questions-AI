@@ -13,7 +13,7 @@ export const useGroupMessageStore = () => {
 
 
     const getGroupMessage = async() =>{
-        
+        if(!localStorage.getItem('token'))return;
        
         try {
             const {data} = await geminiapi.get('/group',);

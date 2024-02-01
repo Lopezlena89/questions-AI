@@ -6,7 +6,6 @@ const { VITE_API_URL } = getEnvVariables()
 const geminiapi = axios.create({
     baseURL: VITE_API_URL,
     headers:{
-       
         'x-token': localStorage.getItem('token')
     }
 });
