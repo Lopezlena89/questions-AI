@@ -64,6 +64,7 @@ export const useAuthStore = () =>{
         } catch (error) {
             localStorage.clear();
             dispatch(onLogout())
+         
         }
     }
 
