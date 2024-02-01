@@ -3,6 +3,8 @@
 import { HomePage } from './components/ui/HomePage';
 // import { ErrorPage } from './components/ui/ErrorPage';
 import {
+
+  HashRouter,
   Navigate,
   Route,
   Routes,
@@ -29,7 +31,7 @@ export const App = () => {
     
   
   return (
-    // <BrowserRouter>
+    <HashRouter>
       <Routes>
           {
               (status === 'not-authenticated')
@@ -53,6 +55,6 @@ export const App = () => {
           
           
       </Routes>
-    // </BrowserRouter>
+    </HashRouter>
   )
 }
