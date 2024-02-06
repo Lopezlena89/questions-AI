@@ -1,10 +1,10 @@
 import axios from 'axios';
-// import { getEnvVariables } from '../helpers/getEnvVariables';
+import { getEnvVariables } from '../helpers/getEnvVariables';
 
-// const { VITE_API_URL } = getEnvVariables()
+const { VITE_API_URL } = getEnvVariables()
 
 const geminiapi = axios.create({
-    baseURL: 'https://vercel.com/lopezlena89/questions-ai',
+    baseURL: VITE_API_URL,
     headers:{
         'x-token': localStorage.getItem('token'),
         
