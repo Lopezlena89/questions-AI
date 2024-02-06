@@ -1,13 +1,16 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers/getEnvVariables';
+// import { getEnvVariables } from '../helpers/getEnvVariables';
 
-const { VITE_API_URL } = getEnvVariables()
+// const { VITE_API_URL } = getEnvVariables()
 
 const geminiapi = axios.create({
-    baseURL: VITE_API_URL,
+    baseURL: 'https://vercel.com/lopezlena89/questions-ai',
     headers:{
-        'x-token': localStorage.getItem('token')
-    }
+        'x-token': localStorage.getItem('token'),
+        
+    },
+    
+
 });
 
 // Todo: configurar interceptores
